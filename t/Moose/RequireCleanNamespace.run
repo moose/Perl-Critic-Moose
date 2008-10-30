@@ -1,0 +1,67 @@
+#      $URL$
+#     $Date$
+#   $Author$
+# $Revision$
+
+## name Basic passing - Moose
+## failures 0
+## cut
+
+use Moose;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+no Moose;
+
+
+## name Basic passing - Moose::Role
+## failures 0
+## cut
+
+use Moose::Role;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+no Moose::Role;
+
+
+## name Basic failure - Moose
+## failures 1
+## cut
+
+use Moose;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+
+## name Basic failure - Moose::Role
+## failures 1
+## cut
+
+use Moose::Role;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+
+# Local Variables:
+#   mode: cperl
+#   cperl-indent-level: 4
+#   fill-column: 78
+#   indent-tabs-mode: nil
+#   c-indentation-style: bsd
+# End:
+# setup vim: set filetype=perl tabstop=4 softtabstop=4 expandtab :
+# setup vim: set shiftwidth=4 shiftround textwidth=78 nowrap autoindent :
+# setup vim: set foldmethod=indent foldlevel=0 :
