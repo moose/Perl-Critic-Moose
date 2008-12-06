@@ -15,7 +15,7 @@ our $VERSION = '0.999_001';
 use Readonly ();
 use version ();
 
-use Perl::Critic::Utils qw< :booleans :severities >;
+use Perl::Critic::Utils qw< :booleans :severities $PERIOD >;
 
 use base 'Perl::Critic::Policy';
 
@@ -24,74 +24,47 @@ Readonly::Scalar my $EXPLANATION =>
     q<Don't leave things used for implementation in your interface.>;
 
 
-sub supported_parameters { return ();                       }
+sub supported_parameters {
+    return (
+        {
+            name            => 'modules',
+            description     => 'The modules that need to be unimported.',
+            default_string  =>
+                'Moose Moose::Role Moose::Util::TypeConstraints',
+            behavior        => 'string list',
+        },
+    );
+}
+
 sub default_severity     { return $SEVERITY_MEDIUM;         }
 sub default_themes       { return qw( moose maintenance );  }
 sub applies_to           { return 'PPI::Document'           }
 
 
-sub prepare_to_scan_document {
-    my ($self, $document) = @_;
-
-    return $document->find_any(
-        sub {
-            my (undef, $element) = @_;
-
-            return $FALSE if not $element->isa('PPI::Statement::Include');
-            return $FALSE if not $element->type() eq 'use';
-
-            my $module = $element->module();
-            return $FALSE if not $module;
-            return $FALSE
-                if not ($module eq 'Moose' or $module eq 'Moose::Role');
-
-            $self->_set_module_to_unimport($module);
-            return $TRUE;
-        }
-    );
-} # end prepare_to_scan_document()
-
-
 sub violates {
     my ($self, undef, $document) = @_;
 
-    my $module_to_unimport = $self->_get_module_to_unimport();
-    my $imports = $document->find_any(
-        sub {
-            my (undef, $element) = @_;
+    my %modules = ( use => {}, require => {}, no => {} );
+    my $includes = $document->find('PPI::Statement::Include');
+    return if not $includes;
 
-            return $FALSE if not $element->isa('PPI::Statement::Include');
-            return $FALSE if not $element->type() eq 'no';
+    for my $include ( @{$includes} ) {
+        $modules{$include->type}->{$include->module} = 1;
+    } # end for
 
-            my $module = $element->module();
-            return $FALSE if not $module;
+    my $modules_to_unimport = $self->{_modules};
+    my @used_but_not_unimported =
+        grep { $modules_to_unimport->{$_} and not $modules{no}->{$_} }
+        keys %{ $modules{use} };
 
-            return $module eq $module_to_unimport;
-        }
-    );
+    return if not @used_but_not_unimported;
 
-    return if $imports;
     return $self->violation(
-        qq<Didn't unimport $module_to_unimport.>,
+        q<Didn't unimport > . (join q<, >, sort @used_but_not_unimported) . $PERIOD,
         $EXPLANATION,
         $document,
     );
 } # end violates()
-
-
-sub _get_module_to_unimport {
-    my ($self) = @_;
-
-    return $self->{_module_to_unimport};
-} # end _get_module_to_unimport()
-
-sub _set_module_to_unimport {
-    my ($self, $module) = @_;
-
-    $self->{_module_to_unimport} = $module;
-
-    return;
-} # end _set_module_to_unimport()
 
 
 1;
@@ -99,6 +72,8 @@ sub _set_module_to_unimport {
 __END__
 
 =pod
+
+=for stopwords unimport
 
 =head1 NAME
 
@@ -120,16 +95,18 @@ version 0.999_001.
 
 Anything in your namespace is part of your interface.  The L<Moose> sugar is
 an implementation detail and not part of what you want to support as part of
-your functionality, especially, if you may change your implementation to not
+your functionality, especially if you may change your implementation to not
 use Moose in the future.
-
-Thus, if you C<use Moose> or C<use Moose::Role>, this policy requires that you
-C<no Moose> or C<no Moose::Role>.
 
 
 =head1 CONFIGURATION
 
-This policy has no configuration options beyond the standard ones.
+By default, this module will complain if you C<use> L<Moose>, L<Moose::Role>,
+or C<Moose::Util::TypeConstraints> but don't unimport them.  You can set the
+modules looked for using the C<modules> option.
+
+    [Moose::RequireCleanNamespace]
+    modules = Moose Moose::Role Moose::Util::TypeConstraints MooseX::My::New::Sugar
 
 
 =head1 SEE ALSO
@@ -139,7 +116,9 @@ L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Style.pod#Clean_up_your_p
 
 =head1 BUGS AND LIMITATIONS
 
-No bugs have been reported.
+Right now this assumes that you've only got one C<package> statement in your
+code.  It will get things wrong if you create multiple classes in a single
+file.
 
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
@@ -192,5 +171,5 @@ POSSIBILITY OF SUCH DAMAGES.
 #   c-indentation-style: bsd
 # End:
 # setup vim: set filetype=perl tabstop=4 softtabstop=4 expandtab :
-# setup vim: set shiftwidth=4 shiftround textwidth=78 nowrap autoindent :
+# setup vim: set shiftwidth=4 shiftround textwidth=78 autoindent :
 # setup vim: set foldmethod=indent foldlevel=0 :

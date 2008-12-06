@@ -60,12 +60,24 @@ my $builder = $class->new(
     sign                => 0,
 
     requires            => {
-        'Perl::Critic'  => '1.093_001',
-        'version'       => 0,
+        'Perl::Critic::Policy'      => '1.093_02',
+        'Perl::Critic::Utils'       => '1.093_02',
+        'Perl::Critic::Utils::PPI'  => '1.093_02',
+        Readonly                    => 0,
+        base                        => 0,
+        strict                      => 0,
+        version                     => 0,
+        warnings                    => 0,
     },
 
     build_requires      => {
-        'Test::More'    => 0,
+        Carp                        => 0,
+        English                     => 0,
+        'Perl::Critic::TestUtils'   => '1.093_02',
+        'Perl::Critic::Utils'       => '1.093_02',
+        'Perl::Critic::Violation'   => '1.093_02',
+        strict                      => 0,
+        warnings                    => 0,
     },
 
     recommends          => {

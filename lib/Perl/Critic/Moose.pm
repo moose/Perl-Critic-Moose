@@ -53,6 +53,12 @@ The included policies are:
 Require removing implementation details from you packages.  [Severity: 3]
 
 
+=item L<Perl::Critic::Policy::Moose::RequireMakeImmutable>
+
+Increase performance by freezing your class structures with
+C<< __PACKAGE__->meta()->make_immutable() >>.  [Severity: 3]
+
+
 =back
 
 
