@@ -89,7 +89,7 @@ my $builder = $class->new(
         resources   => {
             homepage    => 'http://perlcritic.com',
             license     => 'http://dev.perl.org/licenses/',
-            Repository  => 'http://perlcritic.tigris.org/svn/perlcritic/trunk/Perl-Critic-Moose/',
+            Repository  => 'http://guest@perlcritic.tigris.org/svn/perlcritic/trunk/Perl-Critic-Moose/',
             MailingList => 'http://perlcritic.tigris.org/servlets/SummarizeList?listName=users',
         }
     },
