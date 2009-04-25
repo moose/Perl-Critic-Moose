@@ -1,9 +1,9 @@
-#      $URL: http://perlcritic.tigris.org/svn/perlcritic/trunk/Perl-Critic-Moose/lib/Perl/Critic/Policy/Moose/RequireMakeImmutable.pm $
-#     $Date: 2008-10-30 09:36:26 -0500 (Thu, 30 Oct 2008) $
-#   $Author: clonezone $
-# $Revision: 2845 $
+#      $URL$
+#     $Date$
+#   $Author$
+# $Revision$
 
-package Perl::Critic::Policy::Moose::RequireMakeImmutable;
+package Perl::Critic::Policy::Moose::ProhibitNewMethod;
 
 use 5.008;  # Moose's minimum version.
 
@@ -21,15 +21,16 @@ use Perl::Critic::Utils::PPI qw< is_ppi_generic_statement >;
 use base 'Perl::Critic::Policy';
 
 
-Readonly::Scalar my $DESCRIPTION => 'No call was made to make_immutable().';
+Readonly::Scalar my $DESCRIPTION =>
+    q<"new" method/subroutine declared in a Moose class.>;
 Readonly::Scalar my $EXPLANATION =>
-    q<Moose can't optimize itself if classes remain mutable.>;
+    q<Use BUILDARGS and BUILD instead of writing your own constructor.>;
 
 
-sub supported_parameters { return ();                       }
-sub default_severity     { return $SEVERITY_MEDIUM;         }
-sub default_themes       { return qw( moose performance );  }
-sub applies_to           { return 'PPI::Document'           }
+sub supported_parameters { return ();               }
+sub default_severity     { return $SEVERITY_HIGH;   }
+sub default_themes       { return qw< moose bugs >; }
+sub applies_to           { return 'PPI::Document'   }
 
 
 sub prepare_to_scan_document {
@@ -54,48 +55,18 @@ sub prepare_to_scan_document {
 sub violates {
     my ($self, undef, $document) = @_;
 
-    my $makes_immutable = $document->find_any(
+    my $constructor = $document->find_first(
         sub {
             my (undef, $element) = @_;
 
-            return $FALSE if not is_ppi_generic_statement($element);
+            return $FALSE if not $element->isa('PPI::Statement::Sub');
 
-            my $current_token = $element->schild(0);
-            return $FALSE if not $current_token;
-            return $FALSE if not $current_token->isa('PPI::Token::Word');
-            return $FALSE if $current_token->content() ne '__PACKAGE__';
-
-            $current_token = $current_token->snext_sibling();
-            return $FALSE if not $current_token;
-            return $FALSE if not $current_token->isa('PPI::Token::Operator');
-            return $FALSE if $current_token->content() ne '->';
-
-            $current_token = $current_token->snext_sibling();
-            return $FALSE if not $current_token;
-            return $FALSE if not $current_token->isa('PPI::Token::Word');
-            return $FALSE if $current_token->content() ne 'meta';
-
-            $current_token = $current_token->snext_sibling();
-            return $FALSE if not $current_token;
-            if ( $current_token->isa('PPI::Structure::List' ) ) {
-                $current_token = $current_token->snext_sibling();
-                return $FALSE if not $current_token;
-            }
-
-            return $FALSE if not $current_token->isa('PPI::Token::Operator');
-            return $FALSE if $current_token->content() ne '->';
-
-            $current_token = $current_token->snext_sibling();
-            return $FALSE if not $current_token;
-            return $FALSE if not $current_token->isa('PPI::Token::Word');
-            return $FALSE if $current_token->content() ne 'make_immutable';
-
-            return $TRUE;
+            return $element->name() eq 'new';
         }
     );
 
-    return if $makes_immutable;
-    return $self->violation($DESCRIPTION, $EXPLANATION, $document);
+    return if not $constructor;
+    return $self->violation($DESCRIPTION, $EXPLANATION, $constructor);
 } # end violates()
 
 
@@ -107,7 +78,7 @@ __END__
 
 =head1 NAME
 
-Perl::Critic::Policy::Moose::RequireMakeImmutable - Make your Moose code fast.
+Perl::Critic::Policy::Moose::ProhibitNewMethod - Don't override Moose's standard constructors.
 
 
 =head1 AFFILIATION
@@ -117,18 +88,14 @@ This policy is part of L<Perl::Critic::Moose>.
 
 =head1 VERSION
 
-This document describes Perl::Critic::Policy::Moose::RequireMakeImmutable
+This document describes Perl::Critic::Policy::Moose::ProhibitNewMethod
 version 0.999_001.
 
 
 =head1 DESCRIPTION
 
-L<Moose> is very flexible.  That flexibility comes at a performance cost.  You
-can ameliorate most of it by telling Moose when you are done putting your
-classes together.
-
-Thus, if you C<use Moose>, this policy requires that you do
-C<< __PACKAGE__->meta()->make_immutable() >>.
+Overriding C<new()> on a L<Moose> class causes a number of problems.  Use
+C<BUILDARGS()> and C<BUILD()> instead.
 
 
 =head1 CONFIGURATION
@@ -138,7 +105,9 @@ This policy has no configuration options beyond the standard ones.
 
 =head1 SEE ALSO
 
-L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Basics/Recipe7.pod>
+L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/Construction.pod>
+L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Basics/Recipe11.pod>
+L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/BestPractices.pod>
 
 
 =head1 BUGS AND LIMITATIONS
@@ -159,7 +128,7 @@ Elliot Shank  C<< <perl@galumph.com> >>
 
 =head1 COPYRIGHT
 
-Copyright (c)2008-2009, Elliot Shank C<< <perl@galumph.com> >>. Some rights
+Copyright (c)2009, Elliot Shank C<< <perl@galumph.com> >>. Some rights
 reserved.
 
 This module is free software; you can redistribute it and/or modify it under

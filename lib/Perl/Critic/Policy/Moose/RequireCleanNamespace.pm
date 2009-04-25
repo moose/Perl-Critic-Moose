@@ -132,7 +132,7 @@ Elliot Shank  C<< <perl@galumph.com> >>
 
 =head1 COPYRIGHT
 
-Copyright (c)2008, Elliot Shank C<< <perl@galumph.com> >>. Some rights
+Copyright (c)2008-2009, Elliot Shank C<< <perl@galumph.com> >>. Some rights
 reserved.
 
 This module is free software; you can redistribute it and/or modify it under
