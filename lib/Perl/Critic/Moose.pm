@@ -53,6 +53,11 @@ The included policies are:
 Don't override the built-in constructors.  [Severity: 4]
 
 
+=item L<Perl::Critic::Policy::Moose::ProhibitMultipleWiths>
+
+Compose your roles to enjoy safe composition.  [Severity: 4]
+
+
 =item L<Perl::Critic::Policy::Moose::RequireCleanNamespace>
 
 Require removing implementation details from you packages.  [Severity: 3]
