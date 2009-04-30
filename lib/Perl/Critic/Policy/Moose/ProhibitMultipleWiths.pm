@@ -69,7 +69,7 @@ sub violates {
         }
     );
 
-    return if @$with_statements < 2;
+    return if @{ $with_statements } < 2;
 
     my $second_with = $with_statements->[1];
     return $self->violation($DESCRIPTION, $EXPLANATION, $second_with);
