@@ -1,0 +1,50 @@
+#      $URL$
+#     $Date$
+#   $Author$
+# $Revision$
+
+## name with one role
+## failures 0
+## cut
+
+use Moose;
+
+with 'Foo';
+
+## name with two roles
+## failures 0
+## cut
+
+use Moose;
+
+with 'Foo', 'Bar';
+
+## name with two parameterized roles
+## failures 0
+## cut
+
+use Moose;
+
+with Foo => { blarch => 1 },
+     Bar => { brazil => 2 };
+
+## name Basic failure
+## failures 1
+## cut
+
+use Moose;
+
+with 'Foo';
+with 'Bar';
+
+# Local Variables:
+#   mode: cperl
+#   cperl-indent-level: 4
+#   fill-column: 78
+#   indent-tabs-mode: nil
+#   c-indentation-style: bsd
+# End:
+# setup vim: set filetype=perl tabstop=4 softtabstop=4 expandtab :
+# setup vim: set shiftwidth=4 shiftround textwidth=78 nowrap autoindent :
+# setup vim: set foldmethod=indent foldlevel=0 :
+
