@@ -3,7 +3,7 @@ Revision history for Perl-Critic-Moose.
 
 [0.999_002]  2009-xx-xx
 
-    New Moose::ProhibitNewMethod policy.
+    New Moose::ProhibitMultipleWiths and Moose::ProhibitNewMethod policies.
 
     The list of modules that RequireCleanNamespace looks for is customizable
     and Moose::Util::TypeConstraints has been added to the default list.

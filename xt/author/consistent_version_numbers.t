@@ -18,7 +18,7 @@ our $VERSION = '0.999_001';
 use File::Find;
 use File::Slurp;
 
-use Test::More qw(no_plan); ## no critic (Bangs::ProhibitNoPlan)
+use Test::More qw(no_plan);
 
 
 my $last_version = undef;

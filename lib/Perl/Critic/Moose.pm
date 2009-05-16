@@ -48,14 +48,14 @@ The included policies are:
 
 =over
 
-=item L<Perl::Critic::Policy::Moose::ProhibitNewMethod>
-
-Don't override the built-in constructors.  [Severity: 4]
-
-
 =item L<Perl::Critic::Policy::Moose::ProhibitMultipleWiths>
 
 Compose your roles to enjoy safe composition.  [Severity: 4]
+
+
+=item L<Perl::Critic::Policy::Moose::ProhibitNewMethod>
+
+Don't override the built-in constructors.  [Severity: 4]
 
 
 =item L<Perl::Critic::Policy::Moose::RequireCleanNamespace>

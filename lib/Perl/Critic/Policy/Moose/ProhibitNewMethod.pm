@@ -13,7 +13,6 @@ use warnings;
 our $VERSION = '0.999_001';
 
 use Readonly ();
-use version ();
 
 use Perl::Critic::Utils qw< :booleans :severities >;
 use Perl::Critic::Utils::PPI qw< is_ppi_generic_statement >;

@@ -23,7 +23,7 @@ my $class = Module::Build->subclass( code => <<'END_SUBCLASS' );
         $self->depends_on('manifest');
 
         return $self->SUPER::ACTION_test();
-    }
+    } # end ACTION_test()
 
     sub ACTION_authortest {
         my ($self) = @_;
@@ -60,24 +60,21 @@ my $builder = $class->new(
     sign                => 0,
 
     requires            => {
-        'Perl::Critic::Policy'      => '1.093_02',
-        'Perl::Critic::Utils'       => '1.093_02',
-        'Perl::Critic::Utils::PPI'  => '1.093_02',
-        Readonly                    => 0,
         base                        => 0,
+        'Perl::Critic::Policy'      => '1.098',
+        'Perl::Critic::Utils'       => '1.098',
+        'Perl::Critic::Utils::PPI'  => '1.098',
+        Readonly                    => 0,
         strict                      => 0,
-        version                     => 0,
         warnings                    => 0,
     },
 
     build_requires      => {
         Carp                        => 0,
         English                     => 0,
-        'Perl::Critic::TestUtils'   => '1.093_02',
-        'Perl::Critic::Utils'       => '1.093_02',
-        'Perl::Critic::Violation'   => '1.093_02',
-        strict                      => 0,
-        warnings                    => 0,
+        'Perl::Critic::TestUtils'   => '1.098',
+        'Perl::Critic::Utils'       => '1.098',
+        'Perl::Critic::Violation'   => '1.098',
     },
 
     recommends          => {

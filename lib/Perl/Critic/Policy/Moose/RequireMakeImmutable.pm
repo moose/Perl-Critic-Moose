@@ -1,7 +1,7 @@
-#      $URL: http://perlcritic.tigris.org/svn/perlcritic/trunk/Perl-Critic-Moose/lib/Perl/Critic/Policy/Moose/RequireMakeImmutable.pm $
-#     $Date: 2008-10-30 09:36:26 -0500 (Thu, 30 Oct 2008) $
-#   $Author: clonezone $
-# $Revision: 2845 $
+#      $URL$
+#     $Date$
+#   $Author$
+# $Revision$
 
 package Perl::Critic::Policy::Moose::RequireMakeImmutable;
 
@@ -13,7 +13,6 @@ use warnings;
 our $VERSION = '0.999_001';
 
 use Readonly ();
-use version ();
 
 use Perl::Critic::Utils qw< :booleans :severities >;
 use Perl::Critic::Utils::PPI qw< is_ppi_generic_statement >;

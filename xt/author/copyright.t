@@ -19,7 +19,7 @@ use File::Find;
 use File::Slurp;
 use Readonly;
 
-use Test::More qw(no_plan); ## no critic (Bangs::ProhibitNoPlan)
+use Test::More qw(no_plan);
 
 
 Readonly my $LOCALTIME_YEAR_FIELD_NUMBER => 5;
@@ -30,7 +30,7 @@ my $this_year =
     (localtime)[$LOCALTIME_YEAR_FIELD_NUMBER] + $LOCALTIME_YEAR_OFFSET;
 my $copyrights_found = 0;
 find({wanted => \&check_file, no_chdir => 1}, 'blib');
-foreach ( grep { m/^readme/ixms } read_dir(q<.>) ) {
+foreach ( grep { m/^readme/ixms } read_dir(q<.>) ) { ## no critic (Variables::RequireLexicalLoopIterators)
     check_file();
 } # end foreach
 

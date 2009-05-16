@@ -13,7 +13,6 @@ use warnings;
 our $VERSION = '0.999_001';
 
 use Readonly ();
-use version ();
 
 use Perl::Critic::Utils qw< :booleans :severities >;
 use Perl::Critic::Utils::PPI qw< is_ppi_generic_statement >;
@@ -28,7 +27,7 @@ Readonly::Scalar my $EXPLANATION =>
 
 sub supported_parameters { return ();                       }
 sub default_severity     { return $SEVERITY_HIGH;           }
-sub default_themes       { return qw( moose roles );        }
+sub default_themes       { return qw( bugs moose roles );   }
 sub applies_to           { return 'PPI::Document'           }
 
 
@@ -69,6 +68,7 @@ sub violates {
         }
     );
 
+    return if not $with_statements;
     return if @{ $with_statements } < 2;
 
     my $second_with = $with_statements->[1];
@@ -101,8 +101,8 @@ version 0.999_001.
 =head1 DESCRIPTION
 
 L<Moose::Role>s are, among other things, the answer to name conflicts plaguing
-multiple inheritance and mixins. However, to enjoy this protection, you must
-compose your roles together. Roles do not generate conflicts if they are
+multiple inheritance and mix-ins. However, to enjoy this protection, you must
+compose your roles together.  Roles do not generate conflicts if they are
 consumed individually.
 
 Pass all of your roles to a single L<Moose/with> statement.

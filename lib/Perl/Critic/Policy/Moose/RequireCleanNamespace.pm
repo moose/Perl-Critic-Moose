@@ -13,7 +13,6 @@ use warnings;
 our $VERSION = '0.999_001';
 
 use Readonly ();
-use version ();
 
 use Perl::Critic::Utils qw< :booleans :severities $PERIOD >;
 
@@ -96,7 +95,8 @@ version 0.999_001.
 Anything in your namespace is part of your interface.  The L<Moose> sugar is
 an implementation detail and not part of what you want to support as part of
 your functionality, especially if you may change your implementation to not
-use Moose in the future.
+use Moose in the future.  Thus, this policy requires you to say C<no Moose;>
+or C<no Moose::Role;>, etc. as appropriate for modules you C<use>.
 
 
 =head1 CONFIGURATION
@@ -111,7 +111,7 @@ modules looked for using the C<modules> option.
 
 =head1 SEE ALSO
 
-L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Style.pod#Clean_up_your_package>
+L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/BestPractices.pod#no_Moose_and_immutabilize>
 
 
 =head1 BUGS AND LIMITATIONS
@@ -119,6 +119,8 @@ L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Style.pod#Clean_up_your_p
 Right now this assumes that you've only got one C<package> statement in your
 code.  It will get things wrong if you create multiple classes in a single
 file.
+
+This doesn't support using L<namespace::clean>.
 
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
