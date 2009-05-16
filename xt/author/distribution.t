@@ -13,7 +13,7 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_001';
+our $VERSION = '0.999_002';
 
 # No POD coverage due to complaints about builtins when using Fatal.
 use Test::Distribution ( distversion => 1, not => 'podcover' );

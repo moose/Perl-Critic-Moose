@@ -1,4 +1,4 @@
-Perl-Critic-Moose version 0.999_001.
+Perl-Critic-Moose version 0.999_002.
 
 This distribution provides several Perl::Critic policies related to using
 Moose, the "post-modern" object system for Perl.

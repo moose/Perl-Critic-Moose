@@ -10,7 +10,7 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_001';
+our $VERSION = '0.999_002';
 
 use Test::Perl::Critic (
     -severity => 1,

@@ -10,7 +10,7 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_001';
+our $VERSION = '0.999_002';
 
 use Readonly ();
 
@@ -87,7 +87,7 @@ This policy is part of L<Perl::Critic::Moose>.
 =head1 VERSION
 
 This document describes Perl::Critic::Policy::Moose::RequireCleanNamespace
-version 0.999_001.
+version 0.999_002.
 
 
 =head1 DESCRIPTION

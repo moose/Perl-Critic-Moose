@@ -10,7 +10,7 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_001';
+our $VERSION = '0.999_002';
 
 1; # Magic true value required at end of module
 
@@ -33,7 +33,7 @@ announcing their participation in this grouping.
 
 =head1 VERSION
 
-This document describes Perl::Critic::Moose version 0.999_001.
+This document describes Perl::Critic::Moose version 0.999_002.
 
 
 =head1 SYNOPSIS
