@@ -93,8 +93,8 @@ version 0.999_002.
 
 =head1 DESCRIPTION
 
-Overriding C<new()> on a L<Moose> class causes a number of problems.  Use
-C<BUILDARGS()> and C<BUILD()> instead.
+Overriding C<new()> on a L<Moose> class causes a number of problems,
+especially speed issues.  Use C<BUILDARGS()> and C<BUILD()> instead.
 
 
 =head1 CONFIGURATION
