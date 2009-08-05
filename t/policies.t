@@ -44,7 +44,7 @@ my $subtests = subtests_in_tree( 't' );
 if (@ARGV) {
     my @policies = keys %{$subtests}; # get a list of all tests
     # This is inefficient, but who cares...
-    for (@ARGV) {  ## no critic (Variables::RequireLexicalLoopIterators)
+    for (@ARGV) {
         next if m/::/xms;
         if (not s<\A t[\\/] (\w+) [\\/] (\w+) [.]run \z><$1\::$2>xms) {
             confess 'Unknown argument ' . $_;

@@ -48,6 +48,11 @@ The included policies are:
 
 =over
 
+=item L<Perl::Critic::Policy::Moose::ProhibitDESTROYMethod>
+
+Use C<DEMOLISH()> instead of C<DESTROY()>.  [Severity: 3]
+
+
 =item L<Perl::Critic::Policy::Moose::ProhibitMultipleWiths>
 
 Compose your roles to enjoy safe composition.  [Severity: 4]

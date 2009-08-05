@@ -3,7 +3,7 @@
 #   $Author$
 # $Revision$
 
-package Perl::Critic::Policy::Moose::ProhibitNewMethod;
+package Perl::Critic::Policy::Moose::ProhibitDESTROYMethod;
 
 use 5.008;  # Moose's minimum version.
 
@@ -21,13 +21,13 @@ use base 'Perl::Critic::Policy';
 
 
 Readonly::Scalar my $DESCRIPTION =>
-    q<"new" method/subroutine declared in a Moose class.>;
+    q<"DESTROY" method/subroutine declared in a Moose class.>;
 Readonly::Scalar my $EXPLANATION =>
-    q<Use BUILDARGS and BUILD instead of writing your own constructor.>;
+    q<Use DEMOLISH for your destructors.>;
 
 
 sub supported_parameters { return ();               }
-sub default_severity     { return $SEVERITY_HIGH;   }
+sub default_severity     { return $SEVERITY_MEDIUM; }
 sub default_themes       { return qw< moose bugs >; }
 sub applies_to           { return 'PPI::Document'   }
 
@@ -54,18 +54,18 @@ sub prepare_to_scan_document {
 sub violates {
     my ($self, undef, $document) = @_;
 
-    my $constructor = $document->find_first(
+    my $destructor = $document->find_first(
         sub {
             my (undef, $element) = @_;
 
             return $FALSE if not $element->isa('PPI::Statement::Sub');
 
-            return $element->name() eq 'new';
+            return $element->name() eq 'DESTROY';
         }
     );
 
-    return if not $constructor;
-    return $self->violation($DESCRIPTION, $EXPLANATION, $constructor);
+    return if not $destructor;
+    return $self->violation($DESCRIPTION, $EXPLANATION, $destructor);
 } # end violates()
 
 
@@ -75,9 +75,12 @@ __END__
 
 =pod
 
+=for stopwords destructor
+
+
 =head1 NAME
 
-Perl::Critic::Policy::Moose::ProhibitNewMethod - Don't override Moose's standard constructors.
+Perl::Critic::Policy::Moose::ProhibitDESTROYMethod - Use DEMOLISH instead of DESTROY.
 
 
 =head1 AFFILIATION
@@ -87,15 +90,15 @@ This policy is part of L<Perl::Critic::Moose>.
 
 =head1 VERSION
 
-This document describes Perl::Critic::Policy::Moose::ProhibitNewMethod
+This document describes Perl::Critic::Policy::Moose::ProhibitDESTROYMethod
 version 0.999_002.
 
 
 =head1 DESCRIPTION
 
-Overriding C<new()> on a L<Moose> class causes a number of problems, including
-speed issues and problems with order of invocation of constructors when
-multiple inheritance is involved.  Use C<BUILDARGS()> and C<BUILD()> instead.
+Getting the order of destructor execution correct with inheritance involved is
+difficult.  Let L<Moose> take care of it for you by putting your cleanup code
+into a C<DEMOLISH()> method instead of a C<DESTROY()> method.
 
 
 =head1 CONFIGURATION
@@ -106,8 +109,6 @@ This policy has no configuration options beyond the standard ones.
 =head1 SEE ALSO
 
 L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/Construction.pod>
-L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Basics/Recipe10.pod>
-L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/BestPractices.pod>
 
 
 =head1 BUGS AND LIMITATIONS
