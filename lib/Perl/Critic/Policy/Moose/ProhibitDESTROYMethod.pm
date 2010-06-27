@@ -35,38 +35,52 @@ sub applies_to           { return 'PPI::Document'   }
 sub prepare_to_scan_document {
     my ($self, $document) = @_;
 
-    # Tech debt: duplicate code.
-    return $document->find_any(
-        sub {
-            my (undef, $element) = @_;
-
-            return $FALSE if not $element->isa('PPI::Statement::Include');
-            return $FALSE if not $element->type() eq 'use';
-
-            my $module = $element->module();
-            return $FALSE if not $module;
-            return $module eq 'Moose';
-        }
-    );
+    return $self->_is_interesting_document($document);
 } # end prepare_to_scan_document()
+
+
+sub _is_interesting_document {
+    my ($self, $document) = @_;
+
+    return
+            $document->uses_module('Moose')
+        ||  $document->uses_module('Moose::Role');
+} # end _is_interesting_document()
 
 
 sub violates {
     my ($self, undef, $document) = @_;
 
-    my $destructor = $document->find_first(
-        sub {
-            my (undef, $element) = @_;
+    my @violations;
+    foreach my $namespace ( $document->namespaces() ) {
+        SUBDOCUMENT:
+        foreach my $subdocument (
+            $document->subdocuments_for_namespace($namespace)
+        ) {
+            next SUBDOCUMENT
+                if not $self->_is_interesting_document($subdocument);
 
-            return $FALSE if not $element->isa('PPI::Statement::Sub');
+            if (
+                my $destructor = $subdocument->find_first(\&_is_destructor)
+            ) {
+                push
+                    @violations,
+                    $self->violation($DESCRIPTION, $EXPLANATION, $destructor);
+            } # end if
+        } # end foreach
+    } # end foreach
 
-            return $element->name() eq 'DESTROY';
-        }
-    );
-
-    return if not $destructor;
-    return $self->violation($DESCRIPTION, $EXPLANATION, $destructor);
+    return @violations;
 } # end violates()
+
+
+sub _is_destructor {
+    my (undef, $element) = @_;
+
+    return $FALSE if not $element->isa('PPI::Statement::Sub');
+
+    return $element->name() eq 'DESTROY';
+} # end _is_destructor()
 
 
 1;
@@ -85,7 +99,7 @@ Perl::Critic::Policy::Moose::ProhibitDESTROYMethod - Use DEMOLISH instead of DES
 
 =head1 AFFILIATION
 
-This policy is part of L<Perl::Critic::Moose>.
+This policy is part of L<Perl::Critic::Moose|Perl::Critic::Moose>.
 
 
 =head1 VERSION
@@ -112,10 +126,6 @@ L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/Construction.pod>
 
 
 =head1 BUGS AND LIMITATIONS
-
-Right now this assumes that you've only got one C<package> statement in your
-code.  It will get things wrong if you create multiple classes in a single
-file.
 
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
