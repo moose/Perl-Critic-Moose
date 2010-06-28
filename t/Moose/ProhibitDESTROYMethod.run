@@ -60,6 +60,16 @@ package Foo;
 sub DESTROY {}
 
 
+## name Failure for custom module.
+## failures 1
+## parms { equivalent_modules => 'Foo' }
+## cut
+
+use Foo;
+
+sub DESTROY {}
+
+
 # Local Variables:
 #   mode: cperl
 #   cperl-indent-level: 4
