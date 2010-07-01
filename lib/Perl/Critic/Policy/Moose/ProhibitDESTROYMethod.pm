@@ -15,7 +15,6 @@ our $VERSION = '0.999_002';
 use Readonly ();
 
 use Perl::Critic::Utils qw< :booleans :severities $EMPTY >;
-use Perl::Critic::Utils::PPI qw< is_ppi_generic_statement >;
 
 use base 'Perl::Critic::Policy';
 

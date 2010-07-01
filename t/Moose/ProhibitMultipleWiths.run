@@ -3,7 +3,7 @@
 #   $Author$
 # $Revision$
 
-## name with one role
+## name Moose with one role
 ## failures 0
 ## cut
 
@@ -11,7 +11,7 @@ use Moose;
 
 with 'Foo';
 
-## name with two roles
+## name Moose with two roles
 ## failures 0
 ## cut
 
@@ -19,7 +19,7 @@ use Moose;
 
 with 'Foo', 'Bar';
 
-## name with two parameterized roles
+## name Moose with two parameterized roles
 ## failures 0
 ## cut
 
@@ -28,11 +28,63 @@ use Moose;
 with Foo => { blarch => 1 },
      Bar => { brazil => 2 };
 
-## name Basic failure
+## name Basic failure for Moose
 ## failures 1
 ## cut
 
 use Moose;
+
+with 'Foo';
+with 'Bar';
+
+## name Moose::Role with one role
+## failures 0
+## cut
+
+use Moose::Role;
+
+with 'Foo';
+
+## name Moose::Role with two roles
+## failures 0
+## cut
+
+use Moose::Role;
+
+with 'Foo', 'Bar';
+
+## name Moose::Role with two parameterized roles
+## failures 0
+## cut
+
+use Moose::Role;
+
+with Foo => { blarch => 1 },
+     Bar => { brazil => 2 };
+
+## name Basic failure for Moose::Role
+## failures 1
+## cut
+
+use Moose::Role;
+
+with 'Foo';
+with 'Bar';
+
+## name Non-Moose passing
+## failures 0
+## cut
+
+with 'Foo';
+with 'Bar';
+
+## name Multi-package passing
+## failures 0
+## cut
+
+use Moose;
+
+package Blargle;
 
 with 'Foo';
 with 'Bar';
@@ -47,4 +99,3 @@ with 'Bar';
 # setup vim: set filetype=perl tabstop=4 softtabstop=4 expandtab :
 # setup vim: set shiftwidth=4 shiftround textwidth=78 nowrap autoindent :
 # setup vim: set foldmethod=indent foldlevel=0 :
-

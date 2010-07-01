@@ -1,7 +1,7 @@
-#      $URL: http://perlcritic.tigris.org/svn/perlcritic/trunk/Perl-Critic-Moose/t/Moose/RequireCleanNamespace.run $
-#     $Date: 2008-10-30 09:36:26 -0500 (Thu, 30 Oct 2008) $
-#   $Author: clonezone $
-# $Revision: 2845 $
+#      $URL$
+#     $Date$
+#   $Author$
+# $Revision$
 
 ## name Passing without parens
 ## failures 0
