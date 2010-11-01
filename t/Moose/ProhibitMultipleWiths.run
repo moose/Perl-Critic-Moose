@@ -78,13 +78,55 @@ with 'Bar';
 with 'Foo';
 with 'Bar';
 
-## name Multi-package passing
+## name One Moose, one non-Moose
 ## failures 0
 ## cut
 
 use Moose;
 
 package Blargle;
+
+with 'Foo';
+with 'Bar';
+
+## name Two Moose passing
+## failures 0
+## cut
+
+use Moose;
+
+with 'Foo';
+
+
+package Blargle;
+
+use Moose::Role;
+
+with 'Bar';
+
+## name Two Moose failing
+## failures 2
+## cut
+
+use Moose;
+
+with 'Foo';
+with 'Thingy';
+
+
+package Blargle;
+
+use Moose::Role;
+
+with 'Bar';
+with 'Thingy';
+
+## name Failure for custom module.
+## failures 1
+## parms { equivalent_modules => 'Bleu' }
+## cut
+
+use Bleu;
 
 with 'Foo';
 with 'Bar';
