@@ -81,7 +81,6 @@ my $builder = $class->new(
 
     add_to_cleanup      => [
         qw<
-            MANIFEST
             MANIFEST.bak
             META.yml
             Makefile
