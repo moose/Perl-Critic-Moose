@@ -10,7 +10,6 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_002';
 
 use Readonly ();
 
@@ -105,13 +104,11 @@ sub _is_with_statement {
 
 1;
 
+# ABSTRACT: Require role composition
+
 __END__
 
 =pod
-
-=head1 NAME
-
-Perl::Critic::Policy::Moose::ProhibitMultipleWiths - Require role composition
 
 
 =head1 AFFILIATION
@@ -181,20 +178,6 @@ L<http://search.cpan.org/dist/Moose/lib/Moose/Cookbook/Roles/Recipe2.pod>
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org>.
-
-
-=head1 AUTHOR
-
-Shawn Moore  C<< <sartak@bestpractical.com> >>
-
-
-=head1 COPYRIGHT
-
-Copyright (c)2009, Shawn Moore C<< <sartak@bestpractical.com> >>. Some rights
-reserved.
-
-This module is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself. See L<perlartistic>.
 
 
 =head1 DISCLAIMER OF WARRANTY

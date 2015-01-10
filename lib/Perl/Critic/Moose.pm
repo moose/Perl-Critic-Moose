@@ -1,8 +1,3 @@
-#      $URL$
-#     $Date$
-#   $Author$
-# $Revision$
-
 package Perl::Critic::Moose;
 
 use 5.008;  # Moose's minimum version.
@@ -10,17 +5,14 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_002';
 
 1; # Magic true value required at end of module
+
+# ABSTRACT: Policies for Perl::Critic concerned with using Moose
 
 __END__
 
 =for stopwords
-
-=head1 NAME
-
-Perl::Critic::Moose - Policies for Perl::Critic concerned with using Moose, the "post-modern" object system for Perl.
 
 
 =head1 AFFILIATION
@@ -110,20 +102,6 @@ No bugs have been reported.
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org>.
-
-
-=head1 AUTHOR
-
-Elliot Shank  C<< <perl@galumph.com> >>
-
-
-=head1 COPYRIGHT
-
-Copyright (c)2008-2009, Elliot Shank C<< <perl@galumph.com> >>. Some rights
-reserved.
-
-This module is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself. See L<perlartistic>.
 
 
 =head1 DISCLAIMER OF WARRANTY

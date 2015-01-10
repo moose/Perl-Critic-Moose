@@ -10,7 +10,6 @@ use 5.008;  # Moose's minimum version.
 use strict;
 use warnings;
 
-our $VERSION = '0.999_002';
 
 use Readonly ();
 
@@ -98,16 +97,14 @@ sub _is_destructor {
 
 1;
 
+# ABSTRACT: Use DEMOLISH instead of DESTROY.
+
 __END__
 
 =pod
 
 =for stopwords destructor
 
-
-=head1 NAME
-
-Perl::Critic::Policy::Moose::ProhibitDESTROYMethod - Use DEMOLISH instead of DESTROY.
 
 
 =head1 AFFILIATION
@@ -178,20 +175,6 @@ L<http://search.cpan.org/dist/Moose/lib/Moose/Manual/Construction.pod>
 Please report any bugs or feature requests to
 C<bug-perl-critic-moose@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org>.
-
-
-=head1 AUTHOR
-
-Elliot Shank  C<< <perl@galumph.com> >>
-
-
-=head1 COPYRIGHT
-
-Copyright (c)2009, Elliot Shank C<< <perl@galumph.com> >>. Some rights
-reserved.
-
-This module is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself. See L<perlartistic>.
 
 
 =head1 DISCLAIMER OF WARRANTY
