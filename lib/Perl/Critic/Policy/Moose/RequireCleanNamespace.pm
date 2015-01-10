@@ -86,7 +86,6 @@ modules looked for using the C<modules> option.
     [Moose::RequireCleanNamespace]
     modules = Moose Moose::Role Moose::Util::TypeConstraints MooseX::My::New::Sugar
 
-
 =head1 SEE ALSO
 
 L<Moose::Manual::BestPractices>
