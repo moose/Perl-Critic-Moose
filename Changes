@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.01     2015-01-10
+
 - Allow "use namespace::autoclean" to satisfy the RequireCleanNamespace policy
   by default. In addition, you can provide your own list of "cleaners" as a
   configuration option.

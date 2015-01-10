@@ -4,7 +4,7 @@ Perl::Critic::Moose - Policies for Perl::Critic concerned with using Moose
 
 # VERSION
 
-version 1.00
+version 1.01
 
 # DESCRIPTION
 
