@@ -105,3 +105,28 @@ has foo => (
     is  => 'rw',
     isa => 'Str',
 );
+
+## name autoclean is a cleaner
+## failures 0
+## cut
+
+use namespace::autoclean;
+use Moose;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+## name custom cleaner
+## failures 0
+## parms { cleaners => 'My::Cleaner' }
+## cut
+
+use My::Cleaner;
+use Moose;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);

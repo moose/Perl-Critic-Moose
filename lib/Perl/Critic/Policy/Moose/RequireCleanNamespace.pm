@@ -21,6 +21,12 @@ sub supported_parameters {
                 'Moose Moose::Role Moose::Util::TypeConstraints',
             behavior => 'string list',
         },
+        {
+            name           => 'cleaners',
+            description    => 'Modules that clean imports.',
+            default_string => 'namespace::autoclean',
+            behavior       => 'string list',
+        },
     );
 }
 
@@ -38,6 +44,8 @@ sub violates {
     for my $include ( @{$includes} ) {
         $modules{ $include->type }->{ $include->module } = 1;
     }
+
+    return if grep { $modules{use}{$_} } keys %{ $self->{_cleaners} };
 
     my $modules_to_unimport = $self->{_modules};
     my @used_but_not_unimported
@@ -85,6 +93,13 @@ modules looked for using the C<modules> option.
 
     [Moose::RequireCleanNamespace]
     modules = Moose Moose::Role Moose::Util::TypeConstraints MooseX::My::New::Sugar
+
+This module also knows that L<namespace::autoclean> will clean out imports. If
+you'd like to allow other modules to be recognized as namespace cleaners, you
+can set the C<cleaners> option.
+
+    [Moose::RequireCleanNamespace]
+    cleaners = My::Cleaner
 
 =head1 SEE ALSO
 
