@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+- No changes from the last release, just making this official.
+
+
 0.999_002  2009-05-15
 
 - New Moose::ProhibitMultipleWiths and Moose::ProhibitNewMethod policies.
