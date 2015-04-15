@@ -3,6 +3,8 @@ package Perl::Critic::Policy::Moose::RequireMakeImmutable;
 use strict;
 use warnings;
 
+our $VERSION = '1.02';
+
 use Readonly ();
 
 use Perl::Critic::Utils qw< :booleans :severities >;
