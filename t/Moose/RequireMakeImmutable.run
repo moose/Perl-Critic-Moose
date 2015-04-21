@@ -36,3 +36,15 @@ has foo => (
     is  => 'rw',
     isa => 'Str',
 );
+
+## name Failure for custom module.
+## failures 1
+## parms { equivalent_modules => 'Bleu' }
+## cut
+
+use Bleu;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);

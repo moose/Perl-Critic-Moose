@@ -3,6 +3,8 @@ package Perl::Critic::Policy::Moose::ProhibitDESTROYMethod;
 use strict;
 use warnings;
 
+our $VERSION = '1.02';
+
 use Readonly ();
 
 use Perl::Critic::Utils qw< :booleans :severities $EMPTY >;
@@ -18,10 +20,9 @@ sub supported_parameters {
         {
             name => 'equivalent_modules',
             description =>
-                q<The additional modules to treat as equivalent to "Moose".>,
-            default_string             => $EMPTY,
+                q<The additional modules to treat as equivalent to "Moose", "Moose::Role", or "MooseX::Role::Parameterized".>,
             behavior                   => 'string list',
-            list_always_present_values => [qw< Moose Moose::Role >],
+            list_always_present_values => [qw< Moose Moose::Role MooseX::Role::Parameterized >],
         },
     );
 }
@@ -126,13 +127,13 @@ say, you were doing something with L<Moose::Exporter>. For example, if you
 were to have this in your F<.perlcriticrc> file:
 
     [Moose::ProhibitDESTROYMethod]
-    equivalent_modules = Foo Bar
+    equivalent_modules = MyCompany::Moose MooseX::NewThing
 
 then the following code would result in a violation:
 
     package Baz;
 
-    use Bar;
+    use MyCompany::Moose;
 
     sub DESTROY {
         ...

@@ -5,6 +5,8 @@ use 5.008;
 use strict;
 use warnings;
 
+our $VERSION = '1.02';
+
 1;
 
 # ABSTRACT: Policies for Perl::Critic concerned with using Moose
