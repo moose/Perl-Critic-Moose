@@ -44,6 +44,12 @@ sub violates {
     return if not $includes;
 
     for my $include ( @{$includes} ) {
+        # skip if nothing imported
+        if ( $include->type eq 'use' ) {
+            my $lists = $include->find('PPI::Structure::List');
+            next if $lists and not grep { $_->children > 0 } @{$lists};
+        }
+
         $modules{ $include->type }->{ $include->module } = 1;
     }
 
@@ -102,6 +108,9 @@ can set the C<cleaners> option.
 
     [Moose::RequireCleanNamespace]
     cleaners = My::Cleaner
+
+If you use C<use> a module with an empty import list, then this module knows
+that nothing needs to be cleaned, and will ignore that particular import.
 
 =head1 SEE ALSO
 

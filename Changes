@@ -1,5 +1,10 @@
 {{$NEXT}}
 
+- Make Perl::Critic::Policy::Moose::RequireCleanNamespace ignore use
+  statements of the form "use Moose ()". Since this doesn't import anything,
+  there's nothing to clean. PR #3 by Noel Maddy.
+
+
 1.02     2015-04-21
 
 - Make all policies accept an "equivalent_modules" config parameter. If you
