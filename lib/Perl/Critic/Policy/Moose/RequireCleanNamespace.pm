@@ -44,6 +44,12 @@ sub violates {
     return if not $includes;
 
     for my $include ( @{$includes} ) {
+        # skip if nothing imported
+        if ( $include->type eq 'use' ) {
+            my $lists = $include->find('PPI::Structure::List');
+            next if $lists && @$lists == 1 && $lists->[0]->children == 0;
+        }
+
         $modules{ $include->type }->{ $include->module } = 1;
     }
 
