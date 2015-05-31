@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.03     2015-05-31
+
 - Make Perl::Critic::Policy::Moose::RequireCleanNamespace ignore use
   statements of the form "use Moose ()". Since this doesn't import anything,
   there's nothing to clean. PR #3 by Noel Maddy.
