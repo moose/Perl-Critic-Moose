@@ -130,3 +130,9 @@ has foo => (
     is  => 'rw',
     isa => 'Str',
 );
+
+## name Moose without imports
+## failures 0
+## cut
+
+use Moose ();
