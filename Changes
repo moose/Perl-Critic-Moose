@@ -10,7 +10,7 @@
 1.02     2015-04-21
 
 - Make all policies accept an "equivalent_modules" config parameter. If you
-  have an in-house My::Moose, specificy that as an equivalent module and the
+  have an in-house My::Moose, specify that as an equivalent module and the
   policies will check the code that uses My::Moose.
 
 - Added MooseX::Role::Parameterized as a default equivalent module where this
