@@ -52,6 +52,11 @@ Require removing implementation details from you packages. [Severity: 3]
 Increase performance by freezing your class structures with
 C<< __PACKAGE__->meta()->make_immutable() >>. [Severity: 3]
 
+=item L<Perl::Critic::Policy::Moose::ProhibitLazyBuild>
+
+Prevent the use of C< lazy_build > which creates mutability
+problems and pollutes namespaces. [Severity: 2]
+
 =back
 
 =head1 CONFIGURATION AND ENVIRONMENT
