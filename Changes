@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+- Added a new policy, ProhibitLazyBuild. PR #5 by Kieren Diment.
+
+
 1.03     2015-05-31
 
 - Make Perl::Critic::Policy::Moose::RequireCleanNamespace ignore use
