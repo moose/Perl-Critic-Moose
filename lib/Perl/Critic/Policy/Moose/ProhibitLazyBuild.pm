@@ -59,11 +59,11 @@ sub violates {
             return $FALSE if not $current_token;
             return $FALSE if not $current_token->isa('PPI::Token::Word');
             return $FALSE if $current_token->content() ne 'has';
-	    my $parent = $current_token->parent;
-	    my $lazy_build = grep { $_->isa('PPI::Token::Word') 
-				    && $_->content() eq 'lazy_build' }
-	      $parent->tokens;
-	    return $lazy_build ? $TRUE : $FALSE;
+        my $parent = $current_token->parent;
+        my $lazy_build = grep { $_->isa('PPI::Token::Word')
+                    && $_->content() eq 'lazy_build' }
+          $parent->tokens;
+        return $lazy_build ? $TRUE : $FALSE;
      });
     return unless $uses_lazy_build;
     return $self->violation($DESCRIPTION, $EXPLANATION, $document);
