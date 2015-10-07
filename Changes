@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.04     2015-10-07
+
 - Added a new policy, ProhibitLazyBuild. PR #5 by Kieren Diment.
 
 
