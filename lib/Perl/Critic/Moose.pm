@@ -18,15 +18,6 @@ __END__
 Some L<Perl::Critic> policies that will help you keep your code in good shape
 with regards to L<Moose>.
 
-=head1 AFFILIATION
-
-This module has no functionality, but instead contains documentation for this
-distribution and acts as a means of pulling other modules into a bundle. All
-of the Policy modules contained herein will have an "AFFILIATION" section
-announcing their participation in this grouping.
-
-=head1 DESCRIPTION
-
 The included policies are:
 
 =over
@@ -58,6 +49,13 @@ Prevent the use of C< lazy_build > which creates mutability
 problems and pollutes namespaces. [Severity: 2]
 
 =back
+
+=head1 AFFILIATION
+
+This module has no functionality, but instead contains documentation for this
+distribution and acts as a means of pulling other modules into a bundle. All
+of the Policy modules contained herein will have an "AFFILIATION" section
+announcing their participation in this grouping.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
