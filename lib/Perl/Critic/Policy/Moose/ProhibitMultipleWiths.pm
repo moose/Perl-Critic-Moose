@@ -3,7 +3,7 @@ package Perl::Critic::Policy::Moose::ProhibitMultipleWiths;
 use strict;
 use warnings;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 use Readonly ();
 
