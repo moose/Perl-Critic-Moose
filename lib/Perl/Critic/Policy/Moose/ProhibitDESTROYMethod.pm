@@ -21,8 +21,9 @@ sub supported_parameters {
             name => 'equivalent_modules',
             description =>
                 q<The additional modules to treat as equivalent to "Moose", "Moose::Role", or "MooseX::Role::Parameterized".>,
-            behavior                   => 'string list',
-            list_always_present_values => [qw< Moose Moose::Role MooseX::Role::Parameterized >],
+            behavior => 'string list',
+            list_always_present_values =>
+                [qw< Moose Moose::Role MooseX::Role::Parameterized >],
         },
     );
 }

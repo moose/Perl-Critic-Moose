@@ -18,12 +18,15 @@ Readonly::Scalar my $EXPLANATION =>
 sub supported_parameters {
     return (
         {
-            name            => 'equivalent_modules',
-            description     =>
+            name => 'equivalent_modules',
+            description =>
                 q<The additional modules to treat as equivalent to "Moose", "Moose::Role", "MooseX::Role::Parameterized", or "MooseX::Singleton".>,
-            default_string  => 'Moose Moose::Role MooseX::Role::Parameterized MooseX::Singleton',
-            behavior        => 'string list',
-            list_always_present_values => [qw< Moose Moose::Role MooseX::Role::Parameterized MooseX::Singleton >],
+            default_string =>
+                'Moose Moose::Role MooseX::Role::Parameterized MooseX::Singleton',
+            behavior                   => 'string list',
+            list_always_present_values => [
+                qw< Moose Moose::Role MooseX::Role::Parameterized MooseX::Singleton >
+            ],
         },
     );
 }

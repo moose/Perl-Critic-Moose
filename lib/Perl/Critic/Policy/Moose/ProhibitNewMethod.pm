@@ -20,19 +20,20 @@ Readonly::Scalar my $EXPLANATION =>
 sub supported_parameters {
     return (
         {
-            name            => 'equivalent_modules',
-            description     =>
+            name => 'equivalent_modules',
+            description =>
                 q<The additional modules to treat as equivalent to "Moose", "Moose::Role", or "MooseX::Role::Parameterized".>,
-            default_string  => 'Moose Moose::Role MooseX::Role::Parameterized',
-            behavior        => 'string list',
-            list_always_present_values => [qw< Moose Moose::Role MooseX::Role::Parameterized >],
+            default_string => 'Moose Moose::Role MooseX::Role::Parameterized',
+            behavior       => 'string list',
+            list_always_present_values =>
+                [qw< Moose Moose::Role MooseX::Role::Parameterized >],
         },
     );
 }
 
-sub default_severity     { return $SEVERITY_HIGH; }
-sub default_themes       { return qw< moose bugs >; }
-sub applies_to           { return 'PPI::Document' }
+sub default_severity { return $SEVERITY_HIGH; }
+sub default_themes   { return qw< moose bugs >; }
+sub applies_to       { return 'PPI::Document' }
 
 sub prepare_to_scan_document {
     my ( $self, $document ) = @_;

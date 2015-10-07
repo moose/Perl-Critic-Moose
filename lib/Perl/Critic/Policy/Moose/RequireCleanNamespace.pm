@@ -44,6 +44,7 @@ sub violates {
     return if not $includes;
 
     for my $include ( @{$includes} ) {
+
         # skip if nothing imported
         if ( $include->type eq 'use' ) {
             my $lists = $include->find('PPI::Structure::List');
@@ -63,7 +64,7 @@ sub violates {
     return if not @used_but_not_unimported;
 
     return $self->violation(
-        q<Didn't unimport >
+              q<Didn't unimport >
             . ( join q<, >, sort @used_but_not_unimported )
             . $PERIOD,
         $EXPLANATION,
