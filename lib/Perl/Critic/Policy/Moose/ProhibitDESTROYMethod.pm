@@ -2,6 +2,7 @@ package Perl::Critic::Policy::Moose::ProhibitDESTROYMethod;
 
 use strict;
 use warnings;
+use namespace::autoclean;
 
 our $VERSION = '1.05';
 

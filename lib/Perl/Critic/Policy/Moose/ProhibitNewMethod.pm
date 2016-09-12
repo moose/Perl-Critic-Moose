@@ -2,6 +2,7 @@ package Perl::Critic::Policy::Moose::ProhibitNewMethod;
 
 use strict;
 use warnings;
+use namespace::autoclean;
 
 our $VERSION = '1.05';
 
