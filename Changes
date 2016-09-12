@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+1.05     2016-09-12
+
 - Added MooseX::Role::Parameterized to the list of modules which are
   recognized by the RequireCleanNamespace policy.
 
