@@ -94,6 +94,18 @@ has foo => (
 );
 
 
+## name Basic failure - MooseX::Role::Parameterized
+## failures 1
+## cut
+
+use MooseX::Role::Parameterized;
+
+has foo => (
+    is  => 'rw',
+    isa => 'Str',
+);
+
+
 ## name Failure with custom module.
 ## failures 1
 ## parms { modules => 'MooseX::MySugar' }

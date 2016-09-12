@@ -20,7 +20,7 @@ sub supported_parameters {
             name        => 'modules',
             description => 'The modules that need to be unimported.',
             default_string =>
-                'Moose Moose::Role Moose::Util::TypeConstraints',
+                'Moose Moose::Role Moose::Util::TypeConstraints MooseX::Role::Parameterized',
             behavior => 'string list',
         },
         {

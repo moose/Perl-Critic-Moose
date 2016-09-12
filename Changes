@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+- Added MooseX::Role::Parameterized to the list of modules which are
+  recognized by the RequireCleanNamespace policy.
+
+
 1.04     2015-10-07
 
 - Added a new policy, ProhibitLazyBuild. PR #5 by Kieren Diment.
